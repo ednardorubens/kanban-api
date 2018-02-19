@@ -1,0 +1,176 @@
+{
+  "usuarios": [
+    {
+      "id": "UK1",
+      "matricula": "C123456",
+      "nome": "Rafael Felix Almeida",
+      "email": "rafael.almeida@email.com",
+      "configuracoes": {
+        "foto": "sdfsdf",
+        "cor_fundo": "#FF0000",
+        "font": "Tahoma"
+      },
+      "projetos": [
+        {
+          "id": "PK1",
+          "nome": "CHAT de Clientes",
+          "mat_resp": "UK1",
+          "dt_criacao": "01/05/2016",
+          "time": ["UK1", "UK2", "UK3"],
+          "sprints": [
+            {
+              "id": "SK1",
+              "dt_criacao": "02/05/2016",
+              "duracao": 8,
+              "colunas": [
+                {
+                  "nome": "Em Andamento",
+                  "tarefas": [
+                    {
+                      "tarefa": "TK2",
+                      "responsavel": {
+                        "matricula": "UK3",
+                        "rtc_task_id": "rtc02"
+                      },
+                      "duracao_prevista": 5,
+                      "dt_conclusao": "10/05/2016"
+                    }
+                  ]
+                },
+                {
+                  "nome": "Concluído",
+                  "tarefas": [
+                    {
+                      "tarefa": "TK1",
+                      "responsavel": {
+                        "matricula": "UK2",
+                        "rtc_task_id": "rtc01"
+                      },
+                      "duracao_prevista": 3,
+                      "dt_conclusao": "05/05/2016"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "SK2",
+              "dt_criacao": "12/05/2016",
+              "duracao": 15,
+              "colunas": [
+                {
+                  "nome": "Em Andamento",
+                  "tarefas": [
+                    {
+                      "tarefa": "TK3",
+                      "responsavel": {
+                        "matricula": "UK2",
+                        "rtc_task_id": "rtc03"
+                      },
+                      "duracao_prevista": 3,
+                      "dt_conclusao": "16/05/2016"
+                    },
+                    {
+                      "tarefa": "TK4",
+                      "responsavel": {
+                        "matricula": "UK2",
+                        "rtc_task_id": "rtc04"
+                      },
+                      "duracao_prevista": 4,
+                      "dt_conclusao": "05/05/2016"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "tarefas": [
+            {
+              "id": "TK1",
+              "nome": "Desenvolver o CRUD de clientes",
+              "descricao": "Desenvolver o CRUD de clientes",
+              "dt_criacao": "21/05/2016",
+              "comentarios": [
+                {
+                  "usuario": "UK1",
+                  "comentario": "Comentário da tarefa 1"
+                },
+                {
+                  "usuario": "UK2",
+                  "comentario": "Comentário da tarefa 1"
+                }
+              ]
+            },
+            {
+              "id": "TK2",
+              "nome": "Desenvolver as salas de bate-papo",
+              "descricao": "Desenvolver as salas de bate-papo",
+              "dt_criacao": "23/05/2016",
+              "dependencias": ["TK1"]
+            },
+            {
+              "id": "TK3",
+              "nome": "Desenvolver o CRUD de clientes",
+              "descricao": "Desenvolver o CRUD de clientes",
+              "dt_criacao": "21/05/2016",
+              "dependencias": ["TK1", "TK2"]
+            },
+            {
+              "id": "TK4",
+              "nome": "Desenvolver as salas de bate-papo",
+              "descricao": "Desenvolver as salas de bate-papo",
+              "dt_criacao": "23/05/2016",
+              "dependencias": ["TK3"]
+            },
+            {
+              "id": "TK5",
+              "nome": "Desenvolver o CRUD de clientes",
+              "descricao": "Desenvolver o CRUD de clientes",
+              "dt_criacao": "21/05/2016",
+              "dependencias": ["TK1", "TK2"]
+            },
+            {
+              "id": "TK6",
+              "nome": "Desenvolver as salas de bate-papo",
+              "descricao": "Desenvolver as salas de bate-papo",
+              "dt_criacao": "23/05/2016",
+              "dependencias": ["TK3"]
+            }
+          ],
+          "backlog": ["TK5", "TK6"]
+        }
+      ],
+      "atividades": [
+        {
+          "operacao": "Criou o projeto",
+          "dt_operacao": "01/05/2016"
+        }  
+      ]
+    },
+    {
+      "id": "UK2",
+      "matricula": "C123457",
+      "nome": "Carlos Alberto Sousa",
+      "email": "carlos.sousa@email.com",
+      "configuracoes": {
+        "foto": "sdfsdf",
+        "cor_fundo": "#FF0000",
+        "font": "Tahoma",
+        "freq_notificacoes": "mês",
+        "sessoes": [
+          {
+            "ip": "201.114.003.214",
+            "dt_acesso": "05/05/2016 14:23:56",
+            "token": "DSFJ645L6JLJTJDKFGMFKLMBFL"
+          }
+        ]
+      }
+    },
+    {
+      "id": "UK3",
+      "matricula": "C123458",
+      "nome": "Ruan Augusto Cavalcante",
+      "email": "ruan.cavalcante@email.com"
+    }
+  ]
+}
