@@ -1,8 +1,8 @@
 const logger = require('winston');
 const mongoose = require('mongoose');
 
-const uri = process.env.MONGO_URL;
-const options = {user: process.env.MONGO_USER, pass: process.env.MONGO_PASS};
+const uri = process.env.KANBAN_MONGO_URL;
+const options = {user: process.env.KANBAN_MONGO_USER, pass: process.env.KANBAN_MONGO_PASS};
 
 module.exports = (() => {
   const connect = () => {
