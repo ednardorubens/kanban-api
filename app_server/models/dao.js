@@ -30,7 +30,9 @@ module.exports = (() => (tipo, masc = true) => {
         message = message.replace(new RegExp("\"", "g"), "'");
         erro += ' (' + message + ').';
       } else {
-        erro = error;
+        let message = '' + error;
+        message = message.replace(new RegExp("(\\w)*: ", "g"), "");
+        erro += ' (' + message + ').';
       }
     }
     return erro;
