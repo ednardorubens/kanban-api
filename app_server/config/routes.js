@@ -35,6 +35,3 @@ router.delete('/usuarios/:responsavel/projetos/:id', projetoController.remover);
 const atividadeController = require('../controllers/atividade');
 router.get('/atividades', atividadeController.listar);
 router.post('/atividades', atividadeController.inserir);
-router.get('/atividades/:id', atividadeController.buscar);
-router.put('/atividades/:id', atividadeController.atualizar);
-router.delete('/atividades/:id', atividadeController.remover);
