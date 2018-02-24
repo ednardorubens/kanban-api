@@ -6,8 +6,7 @@ module.exports = (() => {
     ...Controller('Usuario'),
     login: (req, res) => passport.authenticate('local', (erro, usuario, info) => {
       if(usuario){
-        res.status(200);
-        res.json({
+        res.status(200).json({
           token: usuario.gerarJwt()
         });
       } else if (erro) {

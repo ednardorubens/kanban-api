@@ -48,7 +48,7 @@ module.exports = (() => (tipo, masc = true) => {
   
   return {
     getTipo   : () => Tipo,
-    listar    : (callback) => Tipo.find((error, itens) => _regCallback(callback, 'listar', error, itens)),
+    listar    : (query = {}, callback) => Tipo.find(query, (error, itens) => _regCallback(callback, 'listar', error, itens)),
     buscar    : (id, callback) => Tipo.findById(id, (error, item) => _regCallback(callback, 'buscar', error, item)),
     inserir   : (item, callback) => Tipo.create(item, (error, itens) => _regCallback(callback, 'criar', error, itens)),
     atualizar : (id, dados, callback) => Tipo.findByIdAndUpdate(id, dados, (error, item) => _regCallback(callback, 'atualizar', error, item)),

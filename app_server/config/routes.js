@@ -24,3 +24,17 @@ router.get('/usuarios', usuarioController.listar);
 router.post('/usuarios', usuarioController.inserir);
 router.post('/login', usuarioController.login);
 router.delete('/usuarios/:id', usuarioController.remover);
+
+const projetoController = require('../controllers/projeto');
+router.get('/usuarios/:responsavel/projetos', projetoController.listar);
+router.post('/usuarios/:responsavel/projetos', projetoController.inserir);
+router.get('/usuarios/:responsavel/projetos/:id', projetoController.buscar);
+router.put('/usuarios/:responsavel/projetos/:id', projetoController.atualizar);
+router.delete('/usuarios/:responsavel/projetos/:id', projetoController.remover);
+
+const atividadeController = require('../controllers/atividade');
+router.get('/atividades', atividadeController.listar);
+router.post('/atividades', atividadeController.inserir);
+router.get('/atividades/:id', atividadeController.buscar);
+router.put('/atividades/:id', atividadeController.atualizar);
+router.delete('/atividades/:id', atividadeController.remover);

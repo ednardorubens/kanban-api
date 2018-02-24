@@ -93,9 +93,9 @@ usuarioSchema.static({
 });
 
 const comentarioSchema = new Schema({
-  data: {type: Date, default: Date.now},
-  usuario: {type: ObjectId, ref: 'Usuario'},
-  comentario: {type: String, trim: true, maxlength: 500}
+  data: {type: Date, default: Date.now, required: true},
+  usuario: {type: ObjectId, ref: 'Usuario', required: true},
+  comentario: {type: String, required: true, trim: true, maxlength: 500}
 }, {
   id: false, _id: false, versionKey: false
 });
@@ -106,9 +106,14 @@ const tarefaSchema = new Schema({
   dt_criacao: {type: Date, default: Date.now},
   comentarios: [comentarioSchema],
   executor: {type: ObjectId, ref: 'Usuario'},
+  cor_cartao: {type: String, maxlength: 7,
+    validate: patternValidator(/#[0-9A-F]{3,6}/, this, '{VALUE} não é uma cor válida!')
+  },
   rtc_task_id: {type: String, required: true, trim: true},
   duracao_prevista: {type: Number, required: true, min: 1},
   dt_conclusao: {type: Date}
+}, {
+  id: false, _id: false, versionKey: false
 });
 const Tarefa = mongoose.model('Tarefa', tarefaSchema);
 
@@ -121,6 +126,8 @@ const sprintSchema = new Schema({
     nome: {type: String, required: true, trim: true, maxlength: 30},
     tarefas: [tarefaSchema]
   })]
+}, {
+  id: false, _id: false, versionKey: false
 });
 const Sprint = mongoose.model('Sprint', sprintSchema);
 
@@ -128,6 +135,7 @@ const projetoSchema = new Schema({
   nome: {type: String, required: true, trim: true, maxlength: 200},
   dt_criacao: {type: Date, default: Date.now},
   comentarios: [comentarioSchema],
+  responsavel: {type: ObjectId, ref: 'Usuario'},
   time: [{type: ObjectId, ref: 'Usuario'}],
   backlog: [tarefaSchema],
   sprints: [sprintSchema]
@@ -139,9 +147,11 @@ const atividadeSchema = new Schema({
   dt_operacao: {type: Date, default: Date.now},
   usuario: {type: ObjectId, ref: 'Usuario'},
   artefatos: new Schema({
-    projeto: {type: ObjectId, ref: 'Projeto'},
-    sprint: {type: ObjectId, ref: 'Sprint'},
-    tarefa: {type: ObjectId, ref: 'Tarefa'},
+    id: {type: ObjectId, required: true},
+    tipo: {type: String, required: true, trim: true, validate: {
+      validator: () => (['projeto', 'sprint', 'tarefa'].indexOf(this) === -1),
+      message: 'Os valores válidos são projeto, sprint ou tarefa.'
+    }},
   }, {
     id: false, _id: false, versionKey: false
   }),

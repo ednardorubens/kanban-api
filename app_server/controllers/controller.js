@@ -52,11 +52,16 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
     }
   }
 
-  const _listar = (res) => {
+  const _listar = (req, res) => {
+    let query = {};
+    if (req && req.params) {
+      query = req.params;
+      console.log(query);
+    }
     if (popular) {
-      _dao.listar((erro, itens) => _responderBusca(res, erro, itens)).populate(popular);
+      _dao.listar(query, (erro, itens) => _responderBusca(res, erro, itens)).populate(popular);
     } else {
-      _dao.listar((erro, itens) => _responderBusca(res, erro, itens));
+      _dao.listar(query, (erro, itens) => _responderBusca(res, erro, itens));
     }
   }
   
@@ -68,7 +73,10 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
 
   const _inserir = (req, res) => {
     if (req && req.body && res) {
-      mapear(req.body, () => _dao.inserir(req.body, (erro, item) => _responderAtualizacao(req, res, erro, item, 'salvar')));
+      mapear(req.body, () => _dao.inserir({
+        ...req.body,
+        ...req.params
+      }, (erro, item) => _responderAtualizacao(req, res, erro, item, 'salvar')));
     }
   }
   
@@ -86,7 +94,7 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
   
   return {
     getDao                : () => _dao,
-    listar                : (req, res) => _listar(res),
+    listar                : (req, res) => _listar(req, res),
     buscar                : (req, res) => _buscar(req, res),
     inserir               : (req, res) => _inserir(req, res),
     atualizar             : (req, res) => _atualizar(req, res),
