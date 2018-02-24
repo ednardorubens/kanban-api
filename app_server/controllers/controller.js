@@ -56,7 +56,6 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
     let query = {};
     if (req && req.params) {
       query = req.params;
-      console.log(query);
     }
     if (popular) {
       _dao.listar(query, (erro, itens) => _responderBusca(res, erro, itens)).populate(popular);
