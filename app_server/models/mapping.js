@@ -16,6 +16,7 @@ const usuarioSchema = new Schema({
   nome: {type: String, required: true, trim: true, maxlength: 200},
   email: {type: String, unique: true, trim: true, required: true, maxlength: 250},
   senha: {type: String, required: true},
+  status: {type: String, default: 'Ativo', maxlength: 15},
   configuracoes: new Schema({
     foto: {type: String},
     fonte: {type: String, trim: true, maxlength: 200},
