@@ -1,3 +1,7 @@
+const logger = require('winston');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+
 module.exports = () => {
   const sessionOptions = {
     resave: false,
@@ -20,5 +24,5 @@ module.exports = () => {
     });
   }
 
-  return sessionOptions;
+  return session(sessionOptions);
 }
