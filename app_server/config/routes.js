@@ -1,4 +1,3 @@
-const jwt = require('express-jwt');
 module.exports = router = require('express').Router();
 const roteador = require('../helpers/roteador')(router);
 
