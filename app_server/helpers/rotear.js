@@ -6,7 +6,7 @@ module.exports = (() => (router) => {
     userProperty: 'payload'
   });
   
-  const _rotear = (url, controllerName, seguro = false) => {
+  const _url = (url, controllerName, seguro = false) => {
     const auth = (seguro
       ? jwt({
         secret: process.env.JWT_SECRET,
@@ -25,7 +25,7 @@ module.exports = (() => (router) => {
   };
   
   return {
-    rotear    : (url, controllerName, seguro = false) => _rotear(url, controllerName, seguro),
-    rotears   : (nomes, seguro = false) => nomes.forEach(nome => rotear(nome + 's', nome, seguro)),
+    url    : (url, controllerName, seguro = false) => _url(url, controllerName, seguro),
+    urls   : (nomes, seguro = false) => nomes.forEach(nome => url(nome + 's', nome, seguro)),
   }
 })();

@@ -1,6 +1,6 @@
 const jwt = require('express-jwt');
 module.exports = router = require('express').Router();
-const roteador = require('../helpers/roteador')(router);
+const rotear = require('../helpers/rotear')(router);
 
 router.get('/', require('../controllers/main').index);
 
@@ -10,7 +10,7 @@ router.post('/usuarios', usuarioController.inserir);
 router.post('/login', usuarioController.login);
 router.delete('/usuarios/:id', usuarioController.remover);
 
-roteador.rotear('/usuarios/:responsavel/projetos', 'projeto');
+rotear.url('/usuarios/:responsavel/projetos', 'projeto');
 
 const atividadeController = require('../controllers/atividade');
 router.get('/atividades', atividadeController.listar);
