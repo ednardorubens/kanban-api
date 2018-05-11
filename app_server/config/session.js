@@ -1,3 +1,7 @@
+const logger = require('winston');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+
 module.exports = () => {
   const sessionOptions = {
     resave: false,
@@ -5,7 +9,7 @@ module.exports = () => {
     secret: '5up37_s3Cur3',
     saveUninitialized: false,
     cookie: {
-      path: 'estoque/api',
+      path: 'kanban/api',
       maxAge: 60 * 60 * 1000,
       // domain: 'localhost',
     },
@@ -20,5 +24,5 @@ module.exports = () => {
     });
   }
 
-  return sessionOptions;
+  return session(sessionOptions);
 }

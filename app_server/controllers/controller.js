@@ -72,10 +72,8 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
 
   const _inserir = (req, res) => {
     if (req && req.body && res) {
-      mapear(req.body, () => _dao.inserir({
-        ...req.body,
-        ...req.params
-      }, (erro, item) => _responderAtualizacao(req, res, erro, item, 'salvar')));
+      mapear(req.body, () => _dao.inserir(Object.assign({}, req.body, req.params),
+        (erro, item) => _responderAtualizacao(req, res, erro, item, 'salvar')));
     }
   }
   

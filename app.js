@@ -6,14 +6,12 @@ const express = require('express');
 const passport = require('passport');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const db = require('./app_server/models/db');
 const cookieParser = require('cookie-parser');
 const cors = require('./app_server/filters/cors');
-const RedisStore = require('connect-redis')(session);
 const loggerConf = require('./app_server/config/logger');
 const passportConf = require('./app_server/config/passport');
-const sessionOptions = require('./app_server/config/session');
+const sessionConf = require('./app_server/config/session');
 
 db.connect();
 
@@ -27,7 +25,7 @@ app.use(helmet());
 // Session Security
 app.set('trust proxy', 1);
 app.use(passport.initialize());
-app.use(session(sessionOptions()));
+app.use(sessionConf());
 app.use(morgan('[:method] :url :status :res[content-length] :response-time ms [:date :remote-user :remote-addr]'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

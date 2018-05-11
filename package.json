@@ -1,5 +1,5 @@
 {
-  "name": "estoque-api",
+  "name": "kanban-api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -26,6 +26,6 @@
     "winston": "^2.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.15.1"
   }
 }
