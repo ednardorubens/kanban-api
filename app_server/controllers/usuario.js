@@ -1,7 +1,7 @@
 const passport = require('passport');
 const Controller = require('./controller');
 
-module.exports = Object.assign({}, Controller('Usuario'), {
+module.exports = Object.assign({}, new Controller({ tipo: 'Usuario' }), {
   login: (req, res) => passport.authenticate('local', (erro, usuario, info) => {
     if(usuario){
       res.status(200).json({

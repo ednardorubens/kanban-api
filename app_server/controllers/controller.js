@@ -1,8 +1,10 @@
 const Dao = require('../models/dao');
 
-module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback) => callback()) => {
+module.exports = function Controller(model = { tipo: '', masc: true, popular: {}, mapear: {} }) {
   
-  const _dao = Dao(tipo, masc), _masc = () => (masc ? 'o' : 'a');
+  const tipo = model['tipo'], masc = model['masc'], paracer = model['parecer'], mapear = model['mapear'];
+
+  const _dao = new Dao(tipo, masc), _masc = () => (masc ? 'o' : 'a');
 
   const _responderBusca = (res, erro, itens) => {
     if (erro) {
@@ -72,14 +74,28 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
 
   const _inserir = (req, res) => {
     if (req && req.body && res) {
-      mapear(req.body, () => _dao.inserir(Object.assign({}, req.body, req.params),
-        (erro, item) => _responderAtualizacao(req, res, erro, item, 'salvar')));
+      if (mapear) {
+        for (const property in mapear) {
+          if (req.body.hasOwnProperty(property)) {
+            req.body[property] = mapear[property](req.body[property]);
+          }
+        }
+      }
+      _dao.inserir(req.body, (erro, item) => _responderAtualizacao(req, res, erro, item, 'salvar'));
     }
   }
   
   const _atualizar = (req, res) => {
     if (req && req.params.id && res) {
-      mapear(req.body, () => _dao.atualizar(req.params.id, req.body, (erro, item) => _responderAtualizacao(req, res, erro, item, 'atualizar')));
+      if (mapear) {
+        for (const property in mapear) {
+          if (req.body.hasOwnProperty(property)) {
+            req.body[property] = mapear[property](req.body[property]);
+          }
+        }
+      }
+      _dao.atualizar(req.params.id, Object.assign({id: req.params.id}, req.body),
+        (erro, item) => _responderAtualizacao(req, res, erro, item, 'atualizar'));
     }
   };
   
@@ -100,4 +116,4 @@ module.exports = (() => (tipo, masc = true, popular, mapear = (objeto, callback)
     responderAtualizacao  : (req, res, erro, item) => _responderAtualizacao(req, res, erro, item),
     responderRemocao      : (req, res, erro, item) => _responderRemocao(res, erro, item),
   }
-})();
+};

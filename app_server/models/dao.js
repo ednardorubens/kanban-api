@@ -1,7 +1,7 @@
 const logger = require('winston');
 const mongoose = require('mongoose');
 
-module.exports = (() => (tipo, masc = true) => {
+module.exports = function Dao(tipo, masc = true) {
   const Tipo = mongoose.model(tipo);
   
   const _regCall = (operation, error) => {
@@ -54,4 +54,4 @@ module.exports = (() => (tipo, masc = true) => {
     atualizar : (id, dados, callback) => Tipo.findByIdAndUpdate(id, dados, (error, item) => _regCallback(callback, 'atualizar', error, item)),
     remover   : (id, callback) => Tipo.findByIdAndRemove(id, (error, item) => _regCallback(callback, 'remover', error, item)),
   }
-})();
+};

@@ -1,15 +1,11 @@
 module.exports = router = require('express').Router();
-const rotear = require('../helpers/rotear')(router);
+const rotear = new require('../helpers/rotear')(router);
 
 router.get('/', require('../controllers/main').index);
 
-const usuarioController = require('../controllers/usuario');
-router.get('/usuarios', usuarioController.listar);
-router.post('/usuarios', usuarioController.inserir);
+const usuarioController = rotear.url('usuario');
 router.post('/login', usuarioController.login);
-router.delete('/usuarios/:id', usuarioController.remover);
-
-rotear.url('/usuarios/:responsavel/projetos', 'projeto');
+rotear.urlc('/usuarios/:responsavel/projetos', 'projeto');
 
 const atividadeController = require('../controllers/atividade');
 router.get('/atividades', atividadeController.listar);
